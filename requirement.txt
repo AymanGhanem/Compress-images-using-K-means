@@ -3,7 +3,7 @@ Django==4.0.2
 django-bootstrap-form==3.4
 ipython==8.4.0
 ipython-genutils==0.2.0
-
+django-crispy-forms
 matplotlib==3.5.1
 matplotlib-inline==0.1.3
 networkx==2.8

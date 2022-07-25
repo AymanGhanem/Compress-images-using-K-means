@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags static %}
+
+{% block title %} <h1>Home</h1> {% endblock %}
+
+
+{% block content %}
+
+  <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+           <label> Choose the image you want To compress </label>
+      <br>
+      <br>
+                 {{ form }}
+      <br>
+      <br>
+                <button class="btn btn-dark my-4" type="submit">Submit</button>
+          </form>
+{% endblock %}
