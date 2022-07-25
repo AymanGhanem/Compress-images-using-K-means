@@ -21,11 +21,13 @@ def compress(input):
     img128 = k_colors.cluster_centers_[k_colors.labels_]
     # Reshape the image back to 128x128x3 to save
     compressed_image = np.reshape(img128, (img.shape))
+    compressed_image = np.uint8(255 * compressed_image)
     # Save image
     img = Image.fromarray(compressed_image, 'RGB')
     buffered = BytesIO()
     img.save(buffered, format="JPEG")
     img_str = base64.b64encode(buffered.getvalue())
+    img_str = img_str.decode()
     return img_str
 
 
