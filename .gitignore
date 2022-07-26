@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/Compress-images-using-K-means.iml
+/.idea/misc.xml
+/.idea/git_toolbox_prj.xml
+/media
