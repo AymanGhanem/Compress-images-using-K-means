@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-6">
+        <div class="card" style="width: 18rem;"> <div class="card-body">
+                <p class="card-text">Compressed Image Size in Bytes <span class="badge badge-success" id="c-size"></span></p>
+            </div>
+            <img class="card-img-top" src="data:image/png;base64,{{ compressed_image }}" alt="Card image cap"
+                 id="c-img"/>
+
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">Original Image Size in Bytes <span class="badge badge-success">{{ original_image.image.size }}</span></p>
+            </div>
+            <img class="card-img-top" src="{{ original_image.image.url }}" alt="Card image cap"
+                 id="o-img"/>
+
+        </div>
+    </div>
+</div>

@@ -12,8 +12,9 @@ def upload(request):
         if form.is_valid():
             compresser = form.save()
             compressed_image = compress(compresser.image)
-            ctx = {"compressed_image": compressed_image}
-            return render(request, 'main/results.html', ctx)
+            ctx = {"compressed_image": compressed_image, "original_image": compresser}
+            return render(request, 'partials/results.html', ctx)
     form = CompressorForm()
-    images = Compressor.objects.all()
+    # images = Compressor.objects.all()
+    images = Compressor.objects.none()
     return render(request=request, template_name="main/upload.html", context={'form': form, 'images': images})

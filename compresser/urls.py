@@ -5,5 +5,5 @@ app_name = "compressor"
 
 
 urlpatterns = [
-    path("", views.upload, name="upload")
+    path("", views.upload, name="upload"),
 ]

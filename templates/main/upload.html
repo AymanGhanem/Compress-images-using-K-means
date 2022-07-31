@@ -1,32 +1,57 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags static %}
 
-{% block title %} <h1>Home</h1> {% endblock %}
+{% block title %}Home{% endblock %}
 
-
+{# TODO use material UI #}
 {% block content %}
 
-  <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-           <label> Choose the image you want To compress </label>
-      <br>
-      <br>
-                 {{ form }}
-      <br>
-      <br>
-                <button class="btn btn-dark my-4" type="submit">Submit</button>
-          </form>
+    <form method="post" enctype="multipart/form-data" id="upload-form">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-dark my-4" type="submit">Submit</button>
+    </form>
 
+    <section id="result">
 
-        <div class="row">
-          {% for m in images %}
-          <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
-            <div class="card h-100 p-4">
-              <img src="{{ m.image.url }}" class="card-img-top">
-            </div>
-          </div>
-          {% empty %}
-          <p>No Images added yet</p>
-          {% endfor %}
-        </div>
+    </section>
+
+{#    <div class="row">#}
+{#        {% for m in images %}#}
+{#            <div class="col-lg-4 col-md-6 col-sm-12 pb-4">#}
+{#                <div class="card h-100 p-4">#}
+{#                    <img src="{{ m.image.url }}" class="card-img-top">#}
+{#                </div>#}
+{#            </div>#}
+{#        {% empty %}#}
+{#            <p>No Images added yet</p>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        $("#upload-form").submit(function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const file = $('#id_image')[0].files[0];
+            formData.append('file', file);
+
+            const uploadUrl = "{% url 'compressor:upload' %}";
+            $.ajax({
+                type: "POST",
+                url: uploadUrl,
+                //dataType: 'json', //not sure but works for me without this
+                data: formData,
+                contentType: false, //this is requireded please see answers above
+                processData: false, //this is requireded please see answers above
+                //cache: false, //not sure but works for me without this
+                success: function (data) {
+                    $("#result").html(data);
+                    const size = getCompressedImageSizeBytes();
+                    $("#c-size").text(`${size}`);
+                }
+            });
+        });
+    </script>
 {% endblock %}
