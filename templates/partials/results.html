@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-6">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">Compressed <span class="badge bg-success"
+                                                                          id="c-size"></span></p>
+            </div>
+            <img class="card-img-top" width="256" height="256" src="data:image/png;base64,{{ compressed_image }}" alt="Card image cap"
+                 id="c-img"/>
+
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">Original <span
+                        class="badge bg-success">{{ original_image.image.size }}</span></p>
+            </div>
+            <img class="card-img-top" width="256" height="256" src="{{ original_image.image.url }}" alt="Card image cap"
+                 id="o-img" data-image-id="{{ original_image.pk }}"/>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <label for="colors" class="form-label">Colors: <span
+            class="badge bg-success" id="selected-color">2</span></label>
+    <input type="range" class="form-range" id="colors" oninput="compressImage(event)" min="2" max="256" step="1" value="2">
+</div>
