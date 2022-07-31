@@ -8,12 +8,12 @@ from io import BytesIO
 import matplotlib.image as ima
 
 
-def compress(input):
+def compress(input, colors=2):
     img = io.imread(input)
     img_r = (img / 255.0).reshape(-1, 3)
 
     # Fit K-means on resized image. n_clusters is the desired number of colors
-    k_colors = KMeans(n_clusters=2).fit(img_r)
+    k_colors = KMeans(n_clusters=colors).fit(img_r)
     # Assign colors to pixels based on their cluster center
     # Each row in k_colors.cluster_centers_ represents the RGB value of a cluster centroid
     # k_colors.labels_ contains the cluster that a pixel is assigned to
